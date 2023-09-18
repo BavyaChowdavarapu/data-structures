@@ -16,11 +16,8 @@ public class Business
      */
     public static void downsize(LinkedList<String> employeeNames, int n)
     {
-        //creates copy of the employeeNames linked list
-        LinkedList<String> names = new LinkedList<>();
-
         //creates iterator to go through the linked list with 
-        ListIterator <String> iterator = names.listIterator();
+        ListIterator <String> iterator = employeeNames.listIterator();
 
         //creates counter to count number of employee names passed over by iterator
         //this is the total number of employees in the list 
@@ -28,15 +25,18 @@ public class Business
 
         //gets the number of employees in the linked list
         while(iterator.hasNext()){
+
+            iterator.next();
+            
             numEmployees++;
+
+            if (numEmployees % n == 0){
+                iterator.remove();
+            }
+            
         }
 
-        
-
-
-
-
-
+        System.out.println(employeeNames);
 
 
     }
