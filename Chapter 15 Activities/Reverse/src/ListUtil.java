@@ -16,32 +16,21 @@ public class ListUtil
         //creates counter to keep track of how many elements should be in the list 
         int counter = strings.size();
 
-        //creates a string object to temporarily hold the value that the iterator removes from the end of the list
-        String temp; 
-
         //creates an iterator to go through the linked list 
         //starting position of both iterators is before the first element of the linked list 
         ListIterator <String> iterator = strings.listIterator();
-        ListIterator <String> iterator2 = strings.listIterator();
+        ListIterator <String> iterator2 = strings.listIterator(counter);
 
-        //gets the iterators to the end of the linked list
-        while(iterator.hasNext()){
-            iterator.next();
-        }
-        
 
         //moves iterator from the back of the linked list to the front of the linked list 
         //for every element the iterator passes over, it is added back to the start of the list
         //and removed from the end of the list 
-        while(counter > 0){
-            //finish this part
-            //gives concurrentmodification error
-            
-            temp = iterator.previous();
-            iterator.remove();
-            iterator2.add(temp);
-            counter--;
+        for (int i = 1; i <= (counter/2); i++){
+            String a = iterator.next();
+            String b = iterator2.previous();
 
+            iterator.set(b);
+            iterator2.set(a);
         }
 
         //prints out reversed linked list 
