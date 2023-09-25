@@ -15,8 +15,29 @@ public class WordAnalysis
     {
         Set <String> dictionaryWords = readWords("Chapter 15 Class Notes/src/words");
         Set <String> novelWords = readWords("Chapter 15 Class Notes/src/throughTheLookingGlass");
-        
+
+        //print all of the words from the novel that aren't in the dictionary 
+        for(String word: novelWords){
+            if (!dictionaryWords.contains(word)){
+                System.out.println(word);
+            }
+        }
+
+        //print the number of words in the novel 
+        System.out.println("There are " + novelWords.size() + "unique words in the novel");
+
+        //print the number of unique words in the nove
+        Iterator<String> iterator = novelWords.iterator();
+        while (iterator.hasNext()){
+            if(iterator.next().length() <= 3){
+                iterator.remove();
+            }
+        }
+        System.out.println("There are " + novelWords.size() + "unique words in the novel with 3 or more letters");
+        //concurrent mod error will only occur if there are two iterators or if you are using the set iterator to modify it, using the iterator modification methods won't 
+        //give you the error
     }
+
 
     /**
      * Reads all words from a file.

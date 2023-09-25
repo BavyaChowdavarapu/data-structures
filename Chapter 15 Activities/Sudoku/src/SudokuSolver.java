@@ -3,17 +3,19 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class SudokuSolver {
-    private final int M = 3;
-    private final int N = M * M;
-    private int[][] grid;
-    private ArrayList<Set<Integer>> rows;
-    private ArrayList<Set<Integer>> cols;
-    private ArrayList<Set<Integer>> squares;
-    private Set<Integer> nums;
+    private final int M = 3;//number of squares in a row
+    private final int N = M * M; //number of squares in a sudoku 
+    private int[][] grid;//2d array of objects 
+    private ArrayList<Set<Integer>> rows;//stores rows
+    private ArrayList<Set<Integer>> cols;//stores cols
+    private ArrayList<Set<Integer>> squares;//stores squares 
+    private Set<Integer> nums; //populating potential numbers 
 
-    public SudokuSolver(String fileName) {
+    
+
+    public SudokuSolver(String fileName) {    
         // read the puzzle file
-        try (Scanner in = new Scanner(new File(fileName))) {
+        try (Scanner in = new Scanner(new File(fileName))) { //constructor 
 
             this.grid = new int[N][N];
 
@@ -23,26 +25,35 @@ public class SudokuSolver {
                 for (int col = 0; col < N; col++) {
                     String strVal = line.substring(col, col + 1);
                     int number;
-                    if (strVal.equals("x")) {
+                    if (strVal.equals("x")) { //x = 0 = blank 
                         number = 0;
                     } else {
                         number = Integer.parseInt(strVal);
                     }
-                    this.grid[row][col] = number;
+                    this.grid[row][col] = number; //stores numbers into grid
                 }
             }
         } catch (FileNotFoundException e) {
             System.out.println("Cannot open: " + fileName);
         }
 
+        
         // create the list of sets for each row (this.rows)
-        // ...
+        int counter = 0;
+        //the number of numbers in a row is also M*M
+        while (counter < N){
+            //rows.set(counter, new Set<Integer>());
+        }
+
+
+       // row has 9 squares (this is an arraylist of sets )
 
         // create the list of sets for each col (this.cols)
-        // ...
+        // each collumn is its own set 
 
         // create the list of sets for each square (this.squares)
         /* the squares are added to the list row-by-row:
+        //create set of all individual squares 
             0 1 2
             3 4 5
             6 7 8
@@ -50,7 +61,7 @@ public class SudokuSolver {
         // ...
 
         // create a hash set for [1..9] (this.nums)
-        // ...
+        // set of the numbers 1-9 (all possible numbers to be used in the sudoku)
 
         // visually inspect that all the sets are correct
         for (int row = 0; row < N; row++) {
@@ -89,7 +100,7 @@ public class SudokuSolver {
         /*
             Create a new set based on the this.nums and remove all elements in the sets
             corresponding to nextRow, nextCol, and the corresponding square (use the
-            removeAll method).
+            removeAll method). //need to use the size of the array list and can be variable 
 
             Properly indexing the squares list of sets is tricky. Verify that your
             algorithm is correct.
@@ -140,6 +151,8 @@ public class SudokuSolver {
         return str;
     }
 
+
+    //runs the code with the sudoku board in puzzle1.txt
     public static void main(String[] args) {
         String fileName = "src/puzzle1.txt";
 
