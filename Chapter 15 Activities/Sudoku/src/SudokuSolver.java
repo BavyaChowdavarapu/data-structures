@@ -14,9 +14,11 @@ public class SudokuSolver {
     
 
     public SudokuSolver(String fileName) {    
-        // read the puzzle file
+        // reads the puzzle file
         try (Scanner in = new Scanner(new File(fileName))) { //constructor 
 
+            //creates a 2D copy of the sudoku board and fills in all of the values 
+            //with the numerical value or a 0 if the space is empty
             this.grid = new int[N][N];
 
             for (int row = 0; row < N; row++) {
@@ -37,21 +39,39 @@ public class SudokuSolver {
             System.out.println("Cannot open: " + fileName);
         }
 
-        
-        // create the list of sets for each row (this.rows)
+        //--------------------------------------------------------------------------------------------------------------
+        // create the list of sets for each row (this.rows)                                          //
+        // row has 9 squares (this is an arraylist of sets )                                         //
+        // create the list of sets for each col (this.cols)                                          //
+        // each collumn is its own set                                                               //
+
+
+        //this adds a hash set for each row and column in the sudoku board to their respective lists 
+        //the board will have the same number of rows as columns and this is also equal to the number of 
+        //numbers in each row or column
+        //this also sets the initial capacity of each row/col set to the number of numbers in each row/col respectively 
         int counter = 0;
-        //the number of numbers in a row is also M*M
+        
         while (counter < N){
-            //rows.set(counter, new Set<Integer>());
+            rows.add(counter, new HashSet<Integer>(N));
+            cols.add(counter, new HashSet<Integer>(N));
         }
 
+       
+        //-------------------------------------------------------------------------------------------------------------
 
-       // row has 9 squares (this is an arraylist of sets )
+        // create the list of sets for each square (this.squares)                                    //
 
-        // create the list of sets for each col (this.cols)
-        // each collumn is its own set 
+        //this creates a has set that has an initial capacity of M (the number of squares in a sudoku, which is also 
+        //the number of numbers in a row within each square)
+        int count = 0;
+        while (count < N){
+            squares.add(count, new HashSet<Integer>(M));
+        }
 
-        // create the list of sets for each square (this.squares)
+        //--------------------------------------------------------------------------------------------------------------- done
+
+
         /* the squares are added to the list row-by-row:
         //create set of all individual squares 
             0 1 2
@@ -59,6 +79,22 @@ public class SudokuSolver {
             6 7 8
          */
         // ...
+
+        //the first square has the first M rows and the first M columns 
+        // ---------------- MAKE A NESTED FOR LOOP WITH THE + SOME VARIABLE TO KEEP TRACK OF HOW MANY MULTIPLES OF THE 
+        //NUMBER OF ROWS AND COLS NEED TO BE ADDED TO THE I AND J VARIABLES EACH RUN THROUGH OF THE LOOP
+        
+        for (int i = 0, j = 0; i < M && j < M; ){
+
+        }
+
+
+
+
+
+
+
+
 
         // create a hash set for [1..9] (this.nums)
         // set of the numbers 1-9 (all possible numbers to be used in the sudoku)
