@@ -225,16 +225,19 @@ public class Sudoku {
         vals.removeAll(this.cols.get(colIndex)); //goes to the cols array list and looks through the entire column
         
         
-        int rowNumber = (rowIndex / rowSq) * 3;
-        int colNumber = (colIndex / rowSq) * 3;
+        //getting the position of the square that the zero is in 
+        int zRIndex = (rowIndex / rowSq) * 3; //gets the index of the row of the zero in the grid
+        int zCIndex = (colIndex / rowSq) * 3; //gets the index of the col of the zero in the grid
         
-         for (int i = rowNumber; i < (rowNumber + 3); i++)
+        //removing the already filled-in numbers in the square from the list of potential values 
+         for (int r = zRIndex; r < (zRIndex + 3); r++)
         {
-            for (int j = colNumber; j < (colNumber + 3); j++)
+            for (int c = zCIndex; c < (zCIndex + 3); c++)
             {
-                vals.remove(this.grid[i][j]);
+                vals.remove(this.grid[r][c]);
             }
         }
+        
         
         // if there are no possible numbers, we cannot solve the board in its current state
         if (vals.isEmpty()) {
