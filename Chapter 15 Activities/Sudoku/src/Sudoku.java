@@ -345,7 +345,7 @@ public class Sudoku {
         }
         
         //works -----------------------------------------------------------------------------------
-        
+        //
         
         //testing the solver 
         System.out.println(solver);
