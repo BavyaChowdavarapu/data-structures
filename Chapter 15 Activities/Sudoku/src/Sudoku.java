@@ -11,7 +11,7 @@ public class Sudoku {
     private int[][] grid;//2d array of objects --> 2d version of the sudoku board 
     private ArrayList<Set<Integer>> rows;//stores number of rows in sudoku board
     private ArrayList<Set<Integer>> cols;//stores number of cols in sudoku board
-    private ArrayList<Set<Integer>> squares;//stores number of squares in sudoku board
+    private static ArrayList<Set<Integer>> squares;//stores number of squares in sudoku board
     private Set<Integer> nums; //populating potential numbers 
 
 
@@ -102,55 +102,41 @@ public class Sudoku {
         //initializing the squares arraylist 
         squares = new ArrayList<Set<Integer>>(); 
         
-        int a = 0; //keeps track of the larger board row that the square is in 
-        int b = 0;  //keeps track of the larger board column that the square is in 
-        int sRow = 0;  // keeps track of the row of each number within the board square 
-        int sCol = 0;  //keeps track of the column of each number within the board square 
+        //adds the squares (with the values of each number in the square) to the square arraylist 
+        int rowCounter = 0; //moves the while loop to the next row 
+        while (rowCounter < rowSq){
+            int a = 0 + (rowCounter*rowSq); //keeps track of the larger board row that the square is in 
+            int b = 0;  //keeps track of the larger board column that the square is in 
+            int sRow = 0;  // keeps track of the row of each number within the board square 
+            int sCol = 0;  //keeps track of the column of each number within the board square 
         
-
-        /*
-        while (a < boardSq){ //row index of squares (top left number) are 0, 3, 6 
-            while (b < boardSq){ //col index of squares (top left number) are 0, 3, 6
-                Set<Integer> sqHashSet = new HashSet<>();
-                
-                //adding the values of each number to the square hash set before adding it to the squares array list 
-                for (sRow = a; sRow < a + rpwSq; sRow++){ //goes through every row in square 
+            while (a < boardSq){ //row index of squares (top left number) are 0, 3, 6 
+                while (b < boardSq){ //col index of squares (top left number) are 0, 3, 6
+                    Set<Integer> sqHashSet = new HashSet<>();
                     
-                    for (sCol = b; sCol < b + rowSq; sCol++){ //goes through every column in square 
-                        sqHashSet.add(this.grid[sRow][sCol]);
+                    //adding the values of each number to the square hash set before adding it to the squares array list 
+                    for (sRow = a; sRow < (a + rowSq); sRow++){ //goes through every row in square 
+                        
+                        for (sCol = b; sCol < (b + rowSq); sCol++){ //goes through every column in square 
+                            sqHashSet.add(this.grid[sRow][sCol]); //adds the numerical value 
+                        }
                     }
+                    this.squares.add(sqHashSet);
+                    b+=rowSq; //moves to the next larger square board column over
                 }
-                this.squares.add(sqHashSet);
-                System.out.println("Square: " + sqHashSet);
-                b+=rowSq; //moves to the next larger square board column over
+                a+=rowSq;    //moves to the next larger square board row below 
+                
             }
-            a+=rowSq;    //moves to the next larger square board row below 
+            
+            rowCounter++; //moves to the next square row below 
         }
-        
-        */
-       
-        for ( a = 0; a < boardSq ; a+=rowSq) // does this 9 times
-        {
-            for ( b = 0; b < boardSq; b+=rowSq)
-            {
-                Set<Integer> numset = new HashSet<>();
-                for (int rows = a; rows < a+rowSq; rows++)
-                {
-                    for (int cols = b; cols < b+rowSq; cols++)
-                    {
-                        numset.add(grid[rows][cols]);
-                    }
-                }
-                this.squares.add(numset);
-                System.out.println("Square: " + numset);
-            }
-        }
+    
     
         //--------------------------------------------------------------------------------------------------------------- done
         
         
         
-        /*
+        
         
         
         this.nums = new HashSet<Integer>();
@@ -174,7 +160,7 @@ public class Sudoku {
         System.out.println(this.nums);
         
         
-        */
+        
         
         
     
@@ -316,7 +302,12 @@ public class Sudoku {
         System.out.println("Expected cols: 9 code: " + cCount);
         System.out.println("Expected squares: 9 code: " + sCount);   
         
+        //works -------------------------------------------------------------------------------
         
+        //test printing out all of the squares
+        for (Set<Integer> thisSquare : squares){
+            System.out.println(thisSquare);
+        }
         
         //testing the solver 
         /*System.out.println(solver);
