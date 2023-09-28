@@ -94,6 +94,19 @@ public class Sudoku {
         
         //------------------------------------------------------------------------------------------------------------- done 
         
+        
+        /* the squares are added to the list row-by-row:                                        //
+        //create set of all individual squares                                                  //
+            0 1 2 
+            3 4 5
+            6 7 8
+         */
+        // ...
+
+        //the first square has the first M rows and the first M columns 
+        // ---------------- MAKE A NESTED FOR LOOP WITH THE + SOME VARIABLE TO KEEP TRACK OF HOW MANY MULTIPLES OF THE 
+        //NUMBER OF ROWS AND COLS NEED TO BE ADDED TO THE I AND J VARIABLES EACH RUN THROUGH OF THE LOOP
+        
         // create the list of sets for each square (this.squares)                                    //
 
         //this creates a has set that has an initial capacity of M (the number of squares in a sudoku, which is also 
@@ -135,19 +148,20 @@ public class Sudoku {
         //--------------------------------------------------------------------------------------------------------------- done
         
         
+        // create a hash set for [1..9] (this.nums)                                                      //
+        // set of the numbers 1-9 (all possible numbers to be used in the sudoku)                        //
         
-        
-        
-        
+        //creates hash set for all of the possible numbers to be added to each space 
         this.nums = new HashSet<Integer>();
-        for (int i = 1; i <= 9; i++)
+        for (int i = 1; i <(boardSq + 1); i++)
         {
             this.nums.add(i);
         }
         
+        //-------------------------------------------------------------------------------------------------------------done 
         
         
-        
+        // visually inspect that all the sets are correct
         for (int row = 0; row < boardSq; row++) {
             System.out.println("row " + row + ": " + this.rows.get(row));
         }
@@ -159,7 +173,7 @@ public class Sudoku {
         }
         System.out.println(this.nums);
         
-        
+        //--------------------------------------------------------------------------------------------------done 
         
         
         
@@ -167,17 +181,17 @@ public class Sudoku {
     }
     
     public boolean solve() {
-        // find an empty location, if any
-        // then finds which row and which column it's in
+        // find an empty location, if any                                                               //
+        // then finds which row and which column it's in                                                //
         boolean finished = true;
-        int nextRow = -1;
-        int nextCol = -1;
+        int rowIndex = -1; 
+        int colIndex = -1;
         for (int row = 0; row < boardSq && finished; row++) {
             for (int col = 0; col < boardSq && finished; col++) {
                 if (this.grid[row][col] == 0) {
                     finished = false;
-                    nextRow = row;
-                    nextCol = col;
+                    rowIndex = row; //row index
+                    colIndex = col; //col undex
                 }
             }
         }
@@ -187,43 +201,61 @@ public class Sudoku {
             return true;
         } 
             
-            
-            
-        Set<Integer> possibleNums = new HashSet<Integer>();
-        possibleNums.addAll(this.nums);
         
-         possibleNums.removeAll(this.rows.get(nextRow));
-        possibleNums.removeAll(this.cols.get(nextCol));
+        //---------------------------------------------------------------------------------------done 
         
-        int rowNumber = nextRow / 3 * 3;
-        int colNumber = nextCol / 3 * 3;
+        // get all possible numbers for the row and column we are trying to populate      //
+        /*
+            Create a new set based on the this.nums and remove all elements in the sets
+            corresponding to nextRow, nextCol, and the corresponding square (use the
+            removeAll method). //need to use the size of the array list and can be variable 
+
+            Properly indexing the squares list of sets is tricky. Verify that your
+            algorithm is correct.
+         */
+        
+        //creates a hash set for all of the potential values for each number spot
+        Set<Integer> vals = new HashSet<Integer>(); 
+        
+        //adds all of the potential values stores in the nums set to the potential value hashSet
+        vals.addAll(this.nums);
+        
+        //removes all of the values from the potential values list that are already in the square
+        vals.removeAll(this.rows.get(rowIndex)); //goes to the rows array list and looks through the entire row 
+        vals.removeAll(this.cols.get(colIndex)); //goes to the cols array list and looks through the entire column
+        
+        
+        int rowNumber = (rowIndex / rowSq) * 3;
+        int colNumber = (colIndex / rowSq) * 3;
         
          for (int i = rowNumber; i < (rowNumber + 3); i++)
         {
             for (int j = colNumber; j < (colNumber + 3); j++)
             {
-                possibleNums.remove(this.grid[i][j]);
+                vals.remove(this.grid[i][j]);
             }
         }
         
-        
-        if (possibleNums.isEmpty()) {
+        // if there are no possible numbers, we cannot solve the board in its current state
+        if (vals.isEmpty()) {
             return false;
         }
         
         
+        //done------------------------------------------------------------------
         
-          for (Integer possibleNum : possibleNums) {
+        
+          for (Integer possibleNum : vals) {
             // update the grid
-            this.grid[nextRow][nextCol] = possibleNum;
+            this.grid[rowIndex][colIndex] = possibleNum;
 
             // update the sets with that number too
-            this.rows.get(nextRow).add(possibleNum);
-            this.cols.get(nextRow).add(possibleNum);
+            this.rows.get(rowIndex).add(possibleNum);
+            this.cols.get(rowIndex).add(possibleNum);
 
             // calculating the square index - where it is in this.squares
             // and adding that to the set in this.squares
-            int squareIndex = (nextRow / 3) * 3 + (nextCol / 3);
+            int squareIndex = (rowIndex / rowSq) * rowSq + (colIndex / rowSq);
             this.squares.get(squareIndex).add(possibleNum);
             
             // recursively solve the board
@@ -236,9 +268,9 @@ public class Sudoku {
                  element in the grid back to 0 and removing possibleNum from all three corresponding
                  sets.
                  */
-                this.grid[nextRow][nextCol] = 0;
-                this.rows.get(nextRow).remove(possibleNum);
-                this.cols.get(nextCol).remove(possibleNum);
+                this.grid[rowIndex][colIndex] = 0;
+                this.rows.get(rowIndex).remove(possibleNum);
+                this.cols.get(colIndex).remove(possibleNum);
                 this.squares.get(squareIndex).remove(possibleNum);
             }
         }
@@ -309,15 +341,18 @@ public class Sudoku {
             System.out.println(thisSquare);
         }
         
+        //works -----------------------------------------------------------------------------------
+        
+        
         //testing the solver 
-        /*System.out.println(solver);
+        System.out.println(solver);
         if (solver.solve()) {
             System.out.println("Solved!");
             System.out.println(solver);
         } else {
             System.out.println("Unsolveable...");
         }
-        */
+        
         
     }
 }
