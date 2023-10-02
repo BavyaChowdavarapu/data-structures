@@ -6,7 +6,7 @@ import java.io.*;
  * whose values are sets of words that start with
  * that same letter. Then print out the word sets in
  * alphabetical order. Update the map by modifying
- * Worked Example 15.1.
+ * Worked Example 15.1. 
 */
 public class FirstLetterMap
 {
