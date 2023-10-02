@@ -29,9 +29,9 @@ public class StringLengthMap
                 // Update the map here
 
                 //if the key for the word (number of letters) is not already in the map, it adds the word
-                if (lengths.get(len) == null) 
+                if (lengths.get(length) == null) 
                 {
-                    lengths.put(len, word);
+                    lengths.put(length, word);
                 }
                 else 
                 {
