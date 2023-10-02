@@ -38,7 +38,7 @@ public class StringLengthMap
                     //if the key for the word (number of letters) is already in the map
                     String newWord = lengths.get(length); //gets the word from the map that has the same key
                     String totalWords = newWord + ", " + word; //concatenates the new word to the old word to the same key 
-                    lengths.put(length, totalWords); //adds the concatenated words with he same key to the map
+                    lengths.put(length, totalWords); //adds the concatenated words with the same key to the map
                 }
             }
 
