@@ -18,22 +18,42 @@ public class StringLengthMap
         {
 
             // Create your map here
-            
+            Map<Integer, String> lengths = new HashMap<>();
 
             while (in.hasNext())
             {
-                String word = clean(in.next());
-                Integer len = word.length();
+                String nextWord = in.next();
+                String word = clean(nextWord);
+                Integer length = word.length();
 
                 // Update the map here
-                // Modify Worked Example 15.1
-                
 
-
+                //if the key for the word (number of letters) is not already in the map, it adds the word
+                if (lengths.get(len) == null) 
+                {
+                    lengths.put(len, word);
+                }
+                else 
+                {
+                    //if the key for the word (number of letters) is already in the map
+                    String newWord = lengths.get(length); //gets the word from the map that has the same key
+                    String totalWords = newWord + ", " + word; //concatenates the new word to the old word to the same key 
+                    lengths.put(length, totalWords); //adds the concatenated words with he same key to the map
+                }
             }
 
             // Print the strings, in increasing order of their length
             // Use this format: 1: i, a, i
+            Set<Integer> keys = wordLengths.keySet();
+            for (Integer key : keys)
+            {
+                System.out.println(key + "letter words: " + lengths.get(key));
+            }
+
+
+            
+
+            
         } catch (FileNotFoundException e)
         {
             System.out.println("Cannot open: " + filename);
