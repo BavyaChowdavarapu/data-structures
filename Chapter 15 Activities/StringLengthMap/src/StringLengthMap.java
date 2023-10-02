@@ -44,7 +44,7 @@ public class StringLengthMap
 
             // Print the strings, in increasing order of their length
             // Use this format: 1: i, a, i
-            Set<Integer> keys = wordLengths.keySet();
+            Set<Integer> keys = lengths.keySet();
             for (Integer key : keys)
             {
                 System.out.println(key + "letter words: " + lengths.get(key));

@@ -8,7 +8,7 @@ import java.io.*;
  * Then print out the word sets in alphabetical order.
  * Use the Java 8 merge() feature.
 */
-public class FirstLetterMap
+public class FirstLetterMap1
 {
     public static void main(String[] args)
     {

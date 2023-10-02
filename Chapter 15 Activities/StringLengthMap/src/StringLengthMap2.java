@@ -23,7 +23,7 @@ public class StringLengthMap2
             while (in.hasNext())
             {
                 String newWord = clean(in.next());
-                Integer length = word.length();
+                Integer length = newWord.length();
 
                 // Update the map here
                 // Use the Java 8 merge() method
@@ -32,7 +32,7 @@ public class StringLengthMap2
 
                 // Print the strings, in increasing order of their length
                 // Use this format: 1: i, a, i
-                Set<Integer> keys = wordLengths.keySet();
+                Set<Integer> keys = lengths.keySet();
                 for (Integer key : keys)
                 {
                     System.out.println(key + "letter words: " + lengths.get(key));

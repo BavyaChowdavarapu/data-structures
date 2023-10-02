@@ -29,13 +29,13 @@ public class FirstLetterMap
                 // Modify Worked Example 15.1
                 Set<String> key = words.get(ch);
                 
-                if (x == (null)) {
+                if (key == (null)) {
                     Set<String> set = new HashSet<>();
                     set.add(newWord);
                     words.put(ch, set);
                 }
                 else {
-                    x.add(newWord);
+                    key.add(newWord);
                     words.put(ch, key);
                 }  
 
