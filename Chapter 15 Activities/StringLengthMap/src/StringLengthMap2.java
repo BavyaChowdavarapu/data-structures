@@ -28,7 +28,10 @@ public class StringLengthMap2
                 // Update the map here
                 // Use the Java 8 merge() method
                 lengths.merge(length, newWord, (old, notPresent) -> old + ", " + notPresent);
-                
+
+
+                // Print the strings, in increasing order of their length
+                // Use this format: 1: i, a, i
                 Set<Integer> keys = wordLengths.keySet();
                 for (Integer key : keys)
                 {
@@ -36,8 +39,7 @@ public class StringLengthMap2
                 }
 
 
-            // Print the strings, in increasing order of their length
-            // Use this format: 1: i, a, i
+            
         } catch (FileNotFoundException e)
         {
             System.out.println("Cannot open: " + filename);
