@@ -38,6 +38,8 @@ public class StringLengthMap2
                     System.out.println(key + "letter words: " + lengths.get(key));
                 }
 
+            }
+
 
             
         } catch (FileNotFoundException e)
