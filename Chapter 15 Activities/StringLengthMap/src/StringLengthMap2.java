@@ -18,19 +18,23 @@ public class StringLengthMap2
         {
 
             // Create your map here
-            
+            Map<Integer, String> lengths = new TreeMap<>();
 
             while (in.hasNext())
             {
-                String word = clean(in.next());
-                Integer len = word.length();
+                String newWord = clean(in.next());
+                Integer length = word.length();
 
                 // Update the map here
                 // Use the Java 8 merge() method
+                lengths.merge(length, newWord, (old, notPresent) -> old + ", " + notPresent);
                 
+                Set<Integer> keys = wordLengths.keySet();
+                for (Integer key : keys)
+                {
+                    System.out.println(key + "letter words: " + lengths.get(key));
+                }
 
-
-            }
 
             // Print the strings, in increasing order of their length
             // Use this format: 1: i, a, i
