@@ -54,17 +54,13 @@ public class LinkedList
         this.first = newNode;
     }
 
-
-
-
     /**
         Returns an iterator for iterating through this list.
         @return an iterator for iterating through this list
     */
-
-
-
-
+    public ListIterator listIterator(){
+        return new LinkedListIterator();
+    }
 
     //Class Node
     //why  is the class static: can be a separate class but it is only every going to be used by the linked list class realistically but we can make it static so we aren't required to 
@@ -98,6 +94,11 @@ public class LinkedList
             @return the traversed element
         */
         public Object next(){
+            //if we try to call next when there are no elements after the iterator, it will throw the no such element exception
+            if (!hasNext()){
+                throw new NoSuchElementException();
+            }
+
             previous = position;
             isAfterNext = true;
 
@@ -112,42 +113,81 @@ public class LinkedList
             return position.data;
         }
 
-
-
-
         /**
             Tests if there is an element after the iterator position.
             @return true if there is an element after the iterator position
         */
-
+        public boolean hasNext(){
+            if (position == null){//when we're at the end of the list so we want to move the iterator to the beginning of the list again 
+                //returns false if there are no elements in the list 
+                //if there are elements in the list, the return statement will return true 
+                return (first != null);
+            }
+            
+            //now we need to check if the next position is null
+            return position.next != null; //this checks if there are any elements in the list at all 
+        }
 
         /**
             Adds an element before the iterator position
             and moves the iterator past the inserted element.
             @param element the element to add
         */
+        public void add(Object element){
+            //if the position is at the beginning of the list (if postition is null), then we can just call the addFirst() method 
+
+            //checks if the iterator is at the start of the list 
+            if (position == null){
+                addFirst(element);
+                position = first;
+            }
+            else { //the element is not at the start of the list 
+                Node newNode = new Node();
+                newNode.data = element;
+                newNode.next = position.next;
+                position.next = newNode;
+                position = newNode;
+            }
 
 
-
-
-
+            isAfterNext = false;
+        }
 
         /**
             Removes the last traversed element. This method may
             only be called after a call to the next() method.
         */
+        public void remove(){
+            if (!isAfterNext){
+                throw new IllegalStateException();
+            }
 
+            //check if we're at the beginning of the list 
+            if (position == first){
+                removeFirst();
+                position = null;
+            }
+            else{ 
+                previous.next = position.next;//the element points to the one after the one that is deleted
+                position = previous; //moves iterator to the previous node 
+            }
 
-
-
-
-
+            isAfterNext = false;
+        }
 
         /**
             Sets the last traversed element to a different value.
             @param element the element to set
         */
+        public void set(Object element){
+            if (!isAfterNext){
+                throw new IllegalStateException();
+            }
 
+            position.data = element;
+            //dont need to set the isafternext variable to false because the set method isn't changing the postition of the iterator 
+            //by adding or removing an element --> it is only changing the value of the element already at the position of the iterator 
+        }
 
 
 
