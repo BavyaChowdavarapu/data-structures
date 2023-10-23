@@ -10,6 +10,8 @@ import java.util.NoSuchElementException;
 */
 public class LinkedList
 {
+    private int counter = 0;
+    private LinkedListIterator iterator = new LinkedListIterator();
     private Node first;
 
     /**
@@ -24,9 +26,17 @@ public class LinkedList
         Computes the size of the linked list.
         @return the number of elements in the list
     */
-    public int size()
+    public int size()//---------------------------------------------------------------------------recursive 
     {
-        . . .
+        if (!iterator.hasNext()){
+            return counter;
+        }
+        else{
+            counter++;
+            iterator.next();
+            return size();
+        }
+        
     }
 
 
