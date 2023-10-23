@@ -2,7 +2,7 @@
     A tester program for a revised version of the LinkedList class.
 */
 public class SizeTester
-{   
+{      
     public static void main(String[] args)
     { 
         LinkedList names = new LinkedList();
