@@ -23,9 +23,17 @@ public class LinkedListQueue
     */
     public void firstToLast()
     {
-        . . .
+        //gets the object at the head
+        Node object = this.head;
+        //moves head to the next node
+        this.head = this.head.next;
 
-
+        //gets the object at the tail and makes the node after it what the head used to be
+        this.tail.next = object;
+        //makes the tail the eobject 
+        this.tail = object;
+        //makes the node after the object null
+        object.next = null;
 
     }
 
