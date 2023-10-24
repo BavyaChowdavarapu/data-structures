@@ -22,11 +22,26 @@ public class LinkedListQueue
     */
     public void lastToFirst()
     {
-        . . .
+        //gets the head of the linked list queue
+        Node beforeLast = this.head;
 
+        //while the node after beforelast is not the tail, it reassigns beforelast to the next node ove
+        while (!beforeLast.next.equals(this.tail)) {
+            beforeLast = beforeLast.next;
+        }
 
+        //gets the tail of the linked list queue
+        Node newFirst = this.tail;
 
+        //reassigns the rail to beforelast 
+        this.tail = beforeLast;
+        //makes the node after beforelast null 
+        beforeLast.next = null;
 
+        //makes the node after the last node the head of the linked list queue (the old tail)
+        newFirst.next = this.head;
+        //reassigns the head of the linked list node to newFirst
+        this.head = newFirst;
 
     }
 
