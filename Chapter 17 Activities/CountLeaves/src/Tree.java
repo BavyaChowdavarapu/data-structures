@@ -64,4 +64,20 @@ public class Tree
     }
 
     // Additional methods will be added in later sections.
+
+    public int leafCount(){
+        if (this.root == null){
+            return 0;
+        }
+
+        int leaves = 0;
+        if (this.root.children.size() != 0){
+            for (Node child : this.root.children){
+            }
+        }
+
+
+        return leaves;
+
+    }
 }
