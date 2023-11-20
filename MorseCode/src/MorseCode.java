@@ -75,10 +75,8 @@ public class MorseCode
         //this should be two lines in this method and the treeInsert 
         //assigns the keys and their values 
 
-        //codeMap.put(letter, code);
-        
-
-
+        codeMap.put(letter, code);
+        treeInsert(letter, code);
     }
 
     /**
@@ -90,9 +88,72 @@ public class MorseCode
      */
     private static void treeInsert(char letter, String code)
     {
-        /*
-            !!! INSERT CODE HERE
-        */
+        //if the position held by "root" is null
+        //sets the value of the child of the previous node to this current node 
+
+        //if the value of the root is null (size = 0)
+        if (codeMap.size() == 0){
+            
+        }
+
+        
+
+
+
+
+
+
+
+
+
+
+        //boolean to use in the while loop
+        boolean placed = false;
+
+        //object used to traverse the tree
+        TreeNode root =  (TreeNode)decodeTree.getValue();
+
+        //node to put into the tree 
+        TreeNode curr = new TreeNode(letter, null, null);
+
+        //counter to keep track of the character index in the code 
+        int count = 0;
+        char ch;
+
+
+        while (!placed){
+            //gets the character at the index in the code 
+            ch = code.charAt(count);
+
+            //if the next character in the code is a dot
+            if (ch == DOT){
+                //checks if the left child is null
+                if (root.getLeft() != null){
+                    root = root.getLeft();
+                }
+
+                //if the left child position is null
+                root.setLeft(curr);
+                placed = true;
+            }
+
+            //if the next character in the code is a dash 
+            if (ch == DASH){
+                //checks if the right postitoin is null
+                if (root.getRight() != null){
+                    root = root.getRight();
+                }
+                
+                //if the right position child is null
+                root.setRight(curr);
+                placed = true;
+            }
+
+            //iterated the count to go to the next character in the code 
+            count++;
+        }
+
+        
     }
 
     /**
