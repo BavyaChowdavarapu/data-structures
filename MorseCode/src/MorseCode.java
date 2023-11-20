@@ -88,12 +88,12 @@ public class MorseCode
      */
     private static void treeInsert(char letter, String code)
     {
-        //if the position held by "root" is null
-        //sets the value of the child of the previous node to this current node 
+        //if the position held by "root" is null ---------------------------------------done 
 
         //if the value of the root is null (size = 0)
         if (codeMap.size() == 0){
-            
+            //makes the root a space 
+            codeMap.put(null, " ");
         }
 
         
@@ -101,7 +101,7 @@ public class MorseCode
 
 
 
-
+        //sets the value of the child of the previous node to this current node -----------------------------double check
 
 
 
