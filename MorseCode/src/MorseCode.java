@@ -96,16 +96,7 @@ public class MorseCode
             codeMap.put(null, " ");
         }
 
-        
-
-
-
-
-        //sets the value of the child of the previous node to this current node -----------------------------double check
-
-
-
-
+        //sets the value of the child of the previous node to this current node -----------------------------done
 
         //boolean to use in the while loop
         boolean placed = false;
@@ -120,8 +111,9 @@ public class MorseCode
         int count = 0;
         char ch;
 
-
-        while (!placed){
+        //while loop keeps running as long as the count is less than the string's length 
+        //and the treenode has not been placed 
+        while (!placed && count < (code.length())){
             //gets the character at the index in the code 
             ch = code.charAt(count);
 
@@ -166,9 +158,35 @@ public class MorseCode
     {
         StringBuffer morse = new StringBuffer(400);
 
-        /*
-            !!! INSERT CODE HERE
-        */
+        //use .append(char ch) here 
+
+        //counter to go through the indices of the text with 
+        int count = 0;
+
+        //char to hold the character in the text
+        char ch;
+
+        
+        //while loop keeps running as long as the index values are valid 
+        while (count < (text.length())){
+            ch = text.charAt(count);
+
+            //if the character is a space 
+            if (ch == ' '){
+                morse.append(ch);
+            }
+
+            //if the character is not one in the decoding tree
+            if (codeMap.get(ch) == null){
+                System.out.println("(character " + ch + " is not a valid input)");
+            }
+            //------------------------------------------------------------------------------finish from here down 
+            
+            //if the character is in the decoding tree 
+
+
+            
+        }
 
         return morse.toString();
     }
